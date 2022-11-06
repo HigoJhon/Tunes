@@ -40,7 +40,9 @@ class Login extends React.Component {
     const { buttonDisabled, name, loading } = this.state;
     return (
       <>
-        <div data-testid="page-login">page-login</div>
+        <div data-testid="page-login">
+          <h1>LOGIN</h1>
+        </div>
         {
           loading ? <Loading /> : (
             <form>

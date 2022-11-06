@@ -1,23 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Header from './Header';
-import { createUser } from '../services/userAPI';
+import searchAlbumsAPIs from '../services/searchAlbumsAPI';
 import Loading from './Loading';
 
 class Search extends React.Component {
   state = {
     name: '',
+    albumName: [],
     buttonDisabled: true,
     loading: false,
+    artist: '',
   };
 
   click = async () => {
     const { name } = this.state;
-    const { history } = this.props;
     this.setState({ loading: true });
-    await createUser({ name });
-    this.setState({ loading: false });
-    history.push('/search');
+    const nameAlbum = await searchAlbumsAPIs(name);
+    this.setState({
+      artist: name,
+      name: '',
+      loading: false,
+      albumName: nameAlbum,
+    });
   };
 
   handleChange = ({ target }) => {
@@ -38,21 +43,23 @@ class Search extends React.Component {
   };
 
   render() {
-    const { buttonDisabled, name, loading } = this.state;
+    const { buttonDisabled, name, loading, albumName, artist } = this.state;
     return (
       <div data-testid="page-search">
+
+        <Header />
+        <input
+          type="text"
+          data-testid="search-artist-input"
+          name="name"
+          value={ name }
+          onChange={ this.handleChange }
+        />
+        <br />
         {
           loading ? <Loading /> : (
+
             <>
-              <Header />
-              <input
-                type="text"
-                data-testid="search-artist-input"
-                name="name"
-                value={ name }
-                onChange={ this.handleChange }
-              />
-              <br />
               <button
                 type="submit"
                 data-testid="search-artist-button"
@@ -61,17 +68,40 @@ class Search extends React.Component {
               >
                 Pesquisar
               </button>
+              <br />
             </>
           )
         }
-
+        {
+          (albumName.length > 0) && (
+            <p>
+              Resultado de álbuns de:
+              {' '}
+              { artist }
+            </p>
+          )
+        }
+        {
+          (albumName.length === 0) && (<p> Nenhum álbum foi encontrado </p>)
+        }
+        {
+          albumName.map((a) => (
+            <ul key={ a.collectionId }>
+              <img src={ a.artworkUrl100 } alt={ a.collectionName } />
+              <li>{ a.artistName }</li>
+              <li>{ a.collectionName }</li>
+              <Link
+                data-testid={ `link-to-album-${a.collectionId}` }
+                to={ `/album/${a.collectionId}` }
+              >
+                Musicas
+              </Link>
+            </ul>
+          ))
+        }
       </div>
     );
   }
 }
-
-Search.propTypes = {
-  history: PropTypes.shape().isRequired,
-};
 
 export default Search;

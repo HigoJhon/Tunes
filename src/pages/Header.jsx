@@ -24,16 +24,16 @@ class Header extends React.Component {
         {
           loading ? <Loading /> : (
             <>
-              <p data-testid="header-user-name">
+              <h1>RadioTrybe</h1>
+              <h2 data-testid="header-user-name">
                 {userName.name}
-              </p>
+              </h2>
               <Link data-testid="link-to-search" to="/search">search</Link>
               <br />
               <Link data-testid="link-to-favorites" to="/favorites">favorites</Link>
               <br />
               <Link data-testid="link-to-profile" to="/profile">profile</Link>
             </>
-
           )
         }
 
