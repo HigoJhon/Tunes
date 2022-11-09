@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
-import musicsAPI from '../services/musicsAPI';
 import MusicCard from './MusicCard';
+import getMusics from '../services/musicsAPI';
 
 class Album extends React.Component {
   state = {
@@ -13,10 +13,10 @@ class Album extends React.Component {
 
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    const data = await musicsAPI(id);
-
+    const data = await getMusics(id);
+    const track = data.filter((a) => a.trackName);
     this.setState({
-      arrayMusic: data,
+      arrayMusic: track,
       nameAr: data[0].artistName,
       albumAr: data[0].collectionName,
     });
@@ -31,15 +31,17 @@ class Album extends React.Component {
         <h2 data-testid="artist-name">{ nameAr }</h2>
         <h2 data-testid="album-name">{ albumAr }</h2>
         {
-          arrayMusic.map((music, index) => (
-            index > 0
-            && <MusicCard
-              key={ music.artisId }
-              artistName={ music.artistName }
-              collectionName={ music.collectionName }
-              trackName={ music.trackName }
-              previewUrl={ music.previewUrl }
-            />
+          arrayMusic.map((music) => (
+            <div key={ music.artisId }>
+              <MusicCard
+                key={ music.artisId }
+                artistName={ music.artistName }
+                collectionName={ music.collectionName }
+                trackName={ music.trackName }
+                previewUrl={ music.previewUrl }
+                trackId={ music.trackId }
+              />
+            </div>
           ))
         }
       </div>
