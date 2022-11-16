@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 import MusicCard from './MusicCard';
 import getMusics from '../services/musicsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   state = {
     arrayMusic: [],
     nameAr: '',
     albumAr: '',
+    savedMusic: [],
   };
 
   async componentDidMount() {
+    const savedMusic = await getFavoriteSongs();
     const { match: { params: { id } } } = this.props;
     const data = await getMusics(id);
     const track = data.filter((a) => a.trackName);
@@ -19,11 +22,12 @@ class Album extends React.Component {
       arrayMusic: track,
       nameAr: data[0].artistName,
       albumAr: data[0].collectionName,
+      savedMusic,
     });
   }
 
   render() {
-    const { arrayMusic, albumAr, nameAr } = this.state;
+    const { arrayMusic, albumAr, nameAr, savedMusic } = this.state;
     return (
       <div data-testid="page-album">
 
@@ -31,18 +35,17 @@ class Album extends React.Component {
         <h2 data-testid="artist-name">{ nameAr }</h2>
         <h2 data-testid="album-name">{ albumAr }</h2>
         {
-          arrayMusic.map((music) => (
-            <div key={ music.artisId }>
-              <MusicCard
-                key={ music.artisId }
-                artistName={ music.artistName }
-                collectionName={ music.collectionName }
-                trackName={ music.trackName }
-                previewUrl={ music.previewUrl }
-                trackId={ music.trackId }
-              />
-            </div>
-          ))
+          arrayMusic.map((music) => {
+            const isSave = savedMusic.some((a) => a.trackId === music.trackId);
+            return (<MusicCard
+              key={ music.trackId }
+              {
+                ...music
+              }
+              isSave={ isSave }
+            />
+            );
+          })
         }
       </div>
     );

@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from './Loading';
 import { addSong } from '../services/favoriteSongsAPI';
-import getMusics from '../services/musicsAPI';
 
 class MusicCard extends Component {
-  state = {
-    loading: false,
-    music: false,
-  };
+  constructor(props) {
+    super(props);
+    const { isSave } = props;
+    this.state = {
+      loading: false,
+      ischecked: isSave,
+    };
+  }
 
   checkMusic = () => {
-    const { trackId } = this.props;
     this.setState({
-      music: true,
+      ischecked: true,
       loading: true,
     }, async () => {
-      const indexMusic = await getMusics(trackId);
-      await addSong(indexMusic);
-      this.setState({ music: true, loading: false });
+      await addSong(this.props);
+      this.setState({ ischecked: true, loading: false });
     });
   };
 
   render() {
     const { trackName, previewUrl, trackId } = this.props;
-    const { loading, music } = this.state;
+    const { loading, ischecked } = this.state;
     return (
       <div>
         {
@@ -45,7 +46,7 @@ class MusicCard extends Component {
                   type="checkbox"
                   id="check"
                   name="check"
-                  checked={ music }
+                  checked={ ischecked }
                   onChange={ this.checkMusic }
                 />
                 Favorita
@@ -61,7 +62,8 @@ class MusicCard extends Component {
 MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
-  trackId: PropTypes.string.isRequired,
+  trackId: PropTypes.number.isRequired,
+  isSave: PropTypes.bool.isRequired,
 };
 
 export default MusicCard;
