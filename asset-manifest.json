@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/HigoJhon/Tunes/static/css/main.728fff24.css",
-    "main.js": "/HigoJhon/Tunes/static/js/main.8c44d122.js",
-    "index.html": "/HigoJhon/Tunes/index.html",
-    "main.728fff24.css.map": "/HigoJhon/Tunes/static/css/main.728fff24.css.map",
-    "main.8c44d122.js.map": "/HigoJhon/Tunes/static/js/main.8c44d122.js.map"
+    "main.css": "/Tunes/static/css/main.728fff24.css",
+    "main.js": "/Tunes/static/js/main.8c44d122.js",
+    "index.html": "/Tunes/index.html",
+    "main.728fff24.css.map": "/Tunes/static/css/main.728fff24.css.map",
+    "main.8c44d122.js.map": "/Tunes/static/js/main.8c44d122.js.map"
   },
   "entrypoints": [
     "static/css/main.728fff24.css",
