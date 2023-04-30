@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/HigoJhon/Tunes/static/css/main.728fff24.css",
+    "main.js": "/HigoJhon/Tunes/static/js/main.8c44d122.js",
+    "index.html": "/HigoJhon/Tunes/index.html",
+    "main.728fff24.css.map": "/HigoJhon/Tunes/static/css/main.728fff24.css.map",
+    "main.8c44d122.js.map": "/HigoJhon/Tunes/static/js/main.8c44d122.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.728fff24.css",
+    "static/js/main.8c44d122.js"
+  ]
+}
