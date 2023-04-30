@@ -1,13 +1,20 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# :notes: Tunes :notes:
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+Neste projeto desenvolvi uma aplicação capaz de reproduzir musicas das mais variadas bandas e artistas. Essa aplicação e capaz de:
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+* Fazer login;
+* Pesquisar por uma banda ou artista;
+* Listar os álbuns disponíveis dessa banda ou artista;
+* Visualizar as músicas de um álbum selecionado;
+* Reproduzir uma prévia das músicas deste álbum;
+
+#### Habilidades usadas:
+
+* Consumo de `API`;
+* Função `setState`;
+* Ciclos de vida de um componente React;
+* Switch do React Router;
+* Links de navegação na aplicação com o componente `Link`;
+
+#### Caso queira ver em seu navegardor e so cliclar no link a baixo.
+#### https://higojhon.github.io/Tunes/
